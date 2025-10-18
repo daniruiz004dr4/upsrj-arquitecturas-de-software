@@ -142,7 +142,6 @@ class TestEvaluation(unittest.TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'user_id', response.data)
 
-
     def test_create_purchase_invalid_user(self):
         initial_response = self.app.get('/purchases')
         initial_count = initial_response.data.decode().count('purchase-card')
@@ -166,8 +165,6 @@ class TestEvaluation(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         final_count = response.data.decode().count('purchase-card')
         self.assertEqual(final_count, initial_count + 1)
-    
-    
 
 
 if __name__ == '__main__':

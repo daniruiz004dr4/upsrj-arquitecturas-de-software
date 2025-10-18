@@ -13,7 +13,7 @@ Descripción: Frontend del microservicio.
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Usuarios</title>
+    <title>Compras</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,24 +51,21 @@ Descripción: Frontend del microservicio.
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="link">
-            <a href="/purchases/create">Agregar Nueva Compra</a>
-        </div>
-        <h2>Compras</h2>
+  <h1>Compras</h1>
 
-        {% if purchases %}
-            {% for purchase in purchases %}
-                <div class="product-card">
-                    <p><strong>ID:</strong> {{ purchase.id }}</p>
-                    <p><strong>ID de ususario:</strong> {{ purchase.user_id }}</p>
-                    <p><strong>ID del producto:</strong> {{ purchase.product_id }}</p>
-                    <p><strong>Timestamp:</strong> {{ purchase.timestamp }}</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>No hay compras registradas.</p>
-        {% endif %}
+  {% if purchases and purchases|length > 0 %}
+    <div id="purchases-list">
+      {% for p in purchases %}
+        <div class="purchase-card">
+          <p><strong>ID:</strong> {{ p.id }}</p>
+          <p><strong>Usuario (ID):</strong> {{ p.user_id }}{% if p._user_name %} — {{ p._user_name }}{% endif %}</p>
+          <p><strong>Producto (ID):</strong> {{ p.product_id }}{% if p._product_name %} — {{ p._product_name }}{% endif %}</p>
+          <p><strong>Fecha:</strong> {{ p.date }}</p>
+        </div>
+      {% endfor %}
     </div>
+  {% else %}
+    <p>No hay compras registradas.</p>
+  {% endif %}
 </body>
 </html>
